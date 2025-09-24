@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">  
+<head>  
+  <meta charset="utf-8" />  
+  <meta name="viewport" content="width=device-width,initial-scale=1" />  
+  <title>Facebook Maker</title>  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">  
+  <style>  
+    body {
+      margin:0;
+      font-family:Inter,system-ui,Arial;
+      background:#071026;
+      color:#e6f0ff;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    /* === Intro Loading Screen === */
+    #intro {
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:#0a142d;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      z-index:1000;
+      animation:fadeOut 1s ease forwards;
+      animation-delay:3s;
+    }
+    #intro h2 {
+      font-size:22px;
+      margin:0;
+      display:flex;
+      align-items:center;
+      gap:5px;
+    }
+    .dots span {
+      animation: blink 1.5s infinite;
+    }
+    .dots span:nth-child(2){animation-delay:.3s}
+    .dots span:nth-child(3){animation-delay:.6s}
+    @keyframes blink {
+      0%,80%,100% {opacity:0;}
+      40% {opacity:1;}
+    }
+    @keyframes fadeOut {
+      to {opacity:0; visibility:hidden;}
+    }
+
+    /* === Card === */
+    .card {
+      background:#0f1724;
+      padding:28px;
+      border-radius:12px;
+      box-shadow:0 6px 30px rgba(0,0,0,.6);
+      width:360px;
+      opacity:0;
+      transform:translateY(50px);
+      transition:all .8s ease;
+    }
+    .card.show {
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    h1 {margin:0 0 20px; font-size:22px; text-align:center;}  
+    label{display:block; margin-top:12px; font-size:14px;}  
+    input{width:100%; padding:10px; border-radius:8px; border:1px solid #1f2937; background:#1e293b; color:#fff; margin-top:6px;}  
+    .btn{
+      width:100%; margin-top:16px; padding:12px;
+      border:none; border-radius:8px;
+      background:linear-gradient(90deg,#0ea5e9,#38bdf8);
+      color:#022235; font-weight:700; cursor:pointer;
+      transition:transform .2s;
+    }
+    .btn:hover {transform:scale(1.05);}
+    .preview{margin-top:20px; display:none; text-align:center;}  
+    .preview img{width:100%; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,.5)}  
+    footer{text-align:center; font-size:12px; margin-top:20px; color:#9fbad9}  
+  </style>  
+</head>  
+<body>  
+
+  <!-- Loading Intro -->
+  <div id="intro">
+    <h2>Fetching please wait <span class="dots"><span>.</span><span>.</span><span>.</span></span></h2>
+  </div>
+
+  <!-- Main Card -->
+  <div class="card" id="card">  
+    <h1>Create Free Facebook Account</h1>  
+    <label>Email</label>  
+    <input id="email" type="email" placeholder="email@example.com">  
+    <label>Password</label>  
+    <input id="password" type="password" placeholder="password">  
+    <button id="loginBtn" class="btn">Create</button>  
+
+    <div class="preview" id="preview">  
+      <img src="https://i.imgur.com/wz9IO5k.jpeg" alt="profile output">  
+      <p style="margin-top:10px">Ito burat subo mo</p>  
+    </div>  
+
+    <footer>Note: Don't use this for bad purpose, this is a free fb maker.</footer>  
+  </div>
+
+  <script>  
+    const loginBtn=document.getElementById('loginBtn');  
+    const preview=document.getElementById('preview');  
+    const card=document.getElementById('card');  
+
+    // Show card after intro
+    window.addEventListener('load',()=>{
+      setTimeout(()=>{card.classList.add('show')},3000);
+    });
+
+    // Fake login
+    loginBtn.addEventListener('click',()=>{
+      const email=document.getElementById('email').value;
+      const pass=document.getElementById('password').value;
+      if(!email||!pass){alert('Please enter email and password');return;}
+      preview.style.display='block';
+    });
+  </script>  
+</body>  
+</html>
