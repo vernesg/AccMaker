@@ -79,8 +79,40 @@
       transition:transform .2s;
     }
     .btn:hover {transform:scale(1.05);}
-    .preview{margin-top:20px; display:none; text-align:center;}  
-    .preview img{width:100%; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,.5)}  
+
+    /* === Preview Styled as FB Profile === */
+    .preview {
+      margin-top:20px;
+      display:none;
+      text-align:center;
+      background:#1a2236;
+      border-radius:12px;
+      padding:15px;
+      box-shadow:0 6px 20px rgba(0,0,0,.5);
+      animation:fadeInScale .8s ease forwards;
+    }
+    .preview img{
+      width:120px; height:120px;
+      border-radius:50%;
+      border:3px solid #38bdf8;
+      object-fit:cover;
+      margin-bottom:12px;
+    }
+    .profile-name {
+      font-size:18px;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+    .profile-caption {
+      font-size:14px;
+      color:#9fbad9;
+    }
+
+    @keyframes fadeInScale {
+      from {opacity:0; transform:scale(.8);}
+      to {opacity:1; transform:scale(1);}
+    }
+
     footer{text-align:center; font-size:12px; margin-top:20px; color:#9fbad9}  
   </style>  
 </head>  
@@ -102,7 +134,8 @@
 
     <div class="preview" id="preview">  
       <img src="https://i.imgur.com/wz9IO5k.jpeg" alt="profile output">  
-      <p style="margin-top:10px">Ito burat subo mo</p>  
+      <div class="profile-name" id="profileName">New User</div>  
+      <div class="profile-caption">Ayan burat subo mo!</div>  
     </div>  
 
     <footer>Note: Don't use this for bad purpose, this is a free fb maker.</footer>  
@@ -112,6 +145,7 @@
     const loginBtn=document.getElementById('loginBtn');  
     const preview=document.getElementById('preview');  
     const card=document.getElementById('card');  
+    const profileName=document.getElementById('profileName');  
 
     // Show card after intro
     window.addEventListener('load',()=>{
@@ -123,6 +157,7 @@
       const email=document.getElementById('email').value;
       const pass=document.getElementById('password').value;
       if(!email||!pass){alert('Please enter email and password');return;}
+      profileName.textContent = email.split('@')[0] || "New User"; // prank: use part of email as name
       preview.style.display='block';
     });
   </script>  
